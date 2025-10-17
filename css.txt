@@ -1,0 +1,1 @@
+.flag-img { width: 24px; height: 16px; vertical-align: sub; margin-right: 5px; }
