@@ -31,7 +31,7 @@
     h2 { color: var(--azul); font-size: 1.11em;}
     h3 { color: var(--azul-claro); margin-bottom:6px; font-size:1em;}
     ul { margin: 7px 0 2px 24px;}
-    .flag { font-size:1.1em;margin-right:4px;}
+    .flag-img { width: 24px; height: 16px; vertical-align: sub; margin-right: 5px; border-radius:2px; box-shadow:0 1px 3px rgba(0,0,0,0.06);}
     .bloques {display:flex;flex-wrap:wrap;gap:26px;}
     .bloque-info {flex:1 1 255px;min-width:250px;background:var(--gris);padding:9px 16px 13px 20px;border-radius:9px;}
     .tablas-grupos { display:flex; gap:22px; flex-wrap:wrap;}
@@ -74,9 +74,9 @@
     <div class="bloque-info">
       <h2>3) Equipos ya clasificados (anfitriones)</h2>
       <ul>
-        <li><span class="flag">🇨🇦</span>Canadá</li>
-        <li><span class="flag">🇺🇸</span>Estados Unidos</li>
-        <li><span class="flag">🇲🇽</span>México</li>
+        <li><img src="flags/ca.png" alt="Canadá" class="flag-img">Canadá</li>
+        <li><img src="flags/us.png" alt="Estados Unidos" class="flag-img">Estados Unidos</li>
+        <li><img src="flags/mx.png" alt="México" class="flag-img">México</li>
       </ul>
     </div>
   </div>
@@ -91,89 +91,89 @@
     <div class="fecha">🗓️ Jueves 13 de noviembre 2025</div>
     <form id="form-partidos" autocomplete="off" onsubmit="event.preventDefault(); simularResultados();">
       <div class="partido-grid">
-        <span><span class="flag">🇬🇹</span>Guatemala</span>
+        <span><img src="flags/gt.png" alt="Guatemala" class="flag-img">Guatemala</span>
         <input type="number" min="0" id="g-guatemala1" />
         <span>vs</span>
         <input type="number" min="0" id="g-panamá1" />
-        <span><span class="flag">🇵🇦</span>Panamá</span>
+        <span><img src="flags/pa.png" alt="Panamá" class="flag-img">Panamá</span>
       </div>
       <div class="partido-grid">
-        <span><span class="flag">🇸🇷</span>Surinam</span>
+        <span><img src="flags/sr.png" alt="Surinam" class="flag-img">Surinam</span>
         <input type="number" min="0" id="g-surinam1" />
         <span>vs</span>
         <input type="number" min="0" id="g-elsalvador1" />
-        <span><span class="flag">🇸🇻</span>El Salvador</span>
+        <span><img src="flags/sv.png" alt="El Salvador" class="flag-img">El Salvador</span>
       </div>
       <div class="partido-grid">
-        <span><span class="flag">🇹🇹</span>Trinidad y Tobago</span>
+        <span><img src="flags/tt.png" alt="Trinidad y Tobago" class="flag-img">Trinidad y Tobago</span>
         <input type="number" min="0" id="g-trinidad1" />
         <span>vs</span>
         <input type="number" min="0" id="g-jamaica1" />
-        <span><span class="flag">🇯🇲</span>Jamaica</span>
+        <span><img src="flags/jm.png" alt="Jamaica" class="flag-img">Jamaica</span>
       </div>
       <div class="partido-grid">
-        <span><span class="flag">🇧🇲</span>Bermudas</span>
+        <span><img src="flags/bm.png" alt="Bermudas" class="flag-img">Bermudas</span>
         <input type="number" min="0" id="g-bermudas1" />
         <span>vs</span>
         <input type="number" min="0" id="g-curazao1" />
-        <span><span class="flag">🇨🇼</span>Curazao</span>
+        <span><img src="flags/cw.png" alt="Curazao" class="flag-img">Curazao</span>
       </div>
       <div class="partido-grid">
-        <span><span class="flag">🇭🇹</span>Haití</span>
+        <span><img src="flags/ht.png" alt="Haití" class="flag-img">Haití</span>
         <input type="number" min="0" id="g-haiti1" />
         <span>vs</span>
         <input type="number" min="0" id="g-costarica1" />
-        <span><span class="flag">🇨🇷</span>Costa Rica</span>
+        <span><img src="flags/cr.png" alt="Costa Rica" class="flag-img">Costa Rica</span>
       </div>
       <div class="partido-grid">
-        <span><span class="flag">🇳🇮</span>Nicaragua</span>
+        <span><img src="flags/ni.png" alt="Nicaragua" class="flag-img">Nicaragua</span>
         <input type="number" min="0" id="g-nicaragua1" />
         <span>vs</span>
         <input type="number" min="0" id="g-honduras1" />
-        <span><span class="flag">🇭🇳</span>Honduras</span>
+        <span><img src="flags/hn.png" alt="Honduras" class="flag-img">Honduras</span>
       </div>
       <div class="fecha">🗓️ Martes 18 de noviembre 2025</div>
       <div class="partido-grid">
-        <span><span class="flag">🇵🇦</span>Panamá</span>
+        <span><img src="flags/pa.png" alt="Panamá" class="flag-img">Panamá</span>
         <input type="number" min="0" id="g-panamá2" />
         <span>vs</span>
         <input type="number" min="0" id="g-elsalvador2" />
-        <span><span class="flag">🇸🇻</span>El Salvador</span>
+        <span><img src="flags/sv.png" alt="El Salvador" class="flag-img">El Salvador</span>
       </div>
       <div class="partido-grid">
-        <span><span class="flag">🇬🇹</span>Guatemala</span>
+        <span><img src="flags/gt.png" alt="Guatemala" class="flag-img">Guatemala</span>
         <input type="number" min="0" id="g-guatemala2" />
         <span>vs</span>
         <input type="number" min="0" id="g-surinam2" />
-        <span><span class="flag">🇸🇷</span>Surinam</span>
+        <span><img src="flags/sr.png" alt="Surinam" class="flag-img">Surinam</span>
       </div>
       <div class="partido-grid">
-        <span><span class="flag">🇯🇲</span>Jamaica</span>
+        <span><img src="flags/jm.png" alt="Jamaica" class="flag-img">Jamaica</span>
         <input type="number" min="0" id="g-jamaica2" />
         <span>vs</span>
         <input type="number" min="0" id="g-curazao2" />
-        <span><span class="flag">🇨🇼</span>Curazao</span>
+        <span><img src="flags/cw.png" alt="Curazao" class="flag-img">Curazao</span>
       </div>
       <div class="partido-grid">
-        <span><span class="flag">🇹🇹</span>Trinidad y Tobago</span>
+        <span><img src="flags/tt.png" alt="Trinidad y Tobago" class="flag-img">Trinidad y Tobago</span>
         <input type="number" min="0" id="g-trinidad2" />
         <span>vs</span>
         <input type="number" min="0" id="g-bermudas2" />
-        <span><span class="flag">🇧🇲</span>Bermudas</span>
+        <span><img src="flags/bm.png" alt="Bermudas" class="flag-img">Bermudas</span>
       </div>
       <div class="partido-grid">
-        <span><span class="flag">🇨🇷</span>Costa Rica</span>
+        <span><img src="flags/cr.png" alt="Costa Rica" class="flag-img">Costa Rica</span>
         <input type="number" min="0" id="g-costarica2" />
         <span>vs</span>
         <input type="number" min="0" id="g-honduras2" />
-        <span><span class="flag">🇭🇳</span>Honduras</span>
+        <span><img src="flags/hn.png" alt="Honduras" class="flag-img">Honduras</span>
       </div>
       <div class="partido-grid">
-        <span><span class="flag">🇭🇹</span>Haití</span>
+        <span><img src="flags/ht.png" alt="Haití" class="flag-img">Haití</span>
         <input type="number" min="0" id="g-haiti2" />
         <span>vs</span>
         <input type="number" min="0" id="g-nicaragua2" />
-        <span><span class="flag">🇳🇮</span>Nicaragua</span>
+        <span><img src="flags/ni.png" alt="Nicaragua" class="flag-img">Nicaragua</span>
       </div>
       <button type="submit">Simular Resultados</button>
     </form>
@@ -188,22 +188,22 @@
 <script>
 const equiposBase = {
   "grupoA": [
-    { nombre: "Surinam",    bandera: "🇸🇷", pts: 6,  dg: 2 },
-    { nombre: "Panamá",     bandera: "🇵🇦", pts: 6,  dg: 1 },
-    { nombre: "Guatemala",  bandera: "🇬🇹", pts: 5,  dg: 0 },
-    { nombre: "El Salvador",bandera: "🇸🇻", pts: 3,  dg: -3 }
+    { nombre: "Surinam",    bandera: "sr", pts: 6,  dg: 2 },
+    { nombre: "Panamá",     bandera: "pa", pts: 6,  dg: 1 },
+    { nombre: "Guatemala",  bandera: "gt", pts: 5,  dg: 0 },
+    { nombre: "El Salvador",bandera: "sv", pts: 3,  dg: -3 }
   ],
   "grupoB": [
-    { nombre: "Jamaica",        bandera: "🇯🇲", pts: 9,  dg: 8 },
-    { nombre: "Curazao",        bandera: "🇨🇼", pts: 8,  dg: 6 },
-    { nombre: "Trinidad y Tobago", bandera: "🇹🇹", pts: 5, dg: 1 },
-    { nombre: "Bermudas",       bandera: "🇧🇲", pts: 0,  dg: -15 }
+    { nombre: "Jamaica",        bandera: "jm", pts: 9,  dg: 8 },
+    { nombre: "Curazao",        bandera: "cw", pts: 8,  dg: 6 },
+    { nombre: "Trinidad y Tobago", bandera: "tt", pts: 5, dg: 1 },
+    { nombre: "Bermudas",       bandera: "bm", pts: 0,  dg: -15 }
   ],
   "grupoC": [
-    { nombre: "Honduras",    bandera: "🇭🇳", pts: 8,  dg: 5 },
-    { nombre: "Costa Rica",  bandera: "🇨🇷", pts: 6,  dg: 3 },
-    { nombre: "Haití",       bandera: "🇭🇹", pts: 5,  dg: 0 },
-    { nombre: "Nicaragua",   bandera: "🇳🇮", pts: 1,  dg: -8 }
+    { nombre: "Honduras",    bandera: "hn", pts: 8,  dg: 5 },
+    { nombre: "Costa Rica",  bandera: "cr", pts: 6,  dg: 3 },
+    { nombre: "Haití",       bandera: "ht", pts: 5,  dg: 0 },
+    { nombre: "Nicaragua",   bandera: "ni", pts: 1,  dg: -8 }
   ]
 };
 const partidos = [
@@ -228,13 +228,16 @@ function resetEquipos() {
     "grupoC": equiposBase["grupoC"].map(eq => ({ ...eq }))
   };
 }
+function flagHtml(eq) {
+  return `<img src="flags/${eq.bandera}.png" alt="${eq.nombre}" class="flag-img">`;
+}
 function renderTabla(grupoId) {
   const tbody = document.getElementById(grupoId);
   let arr = equipos[grupoId];
   arr.sort((a,b)=> b.pts-b.pts|| b.dg-a.dg);
   tbody.innerHTML = arr.map((eq,i) =>
     `<tr class="${i===0?'clasificado':i===1?'repechaje':eq.pts===0?'eliminado':''}">
-      <td class="bandera-nombre"><span class="flag">${eq.bandera}</span>${eq.nombre}</td>
+      <td class="bandera-nombre">${flagHtml(eq)}${eq.nombre}</td>
       <td>${eq.pts}</td>
       <td>${eq.dg>0?'+':''}${eq.dg}</td>
     </tr>`
@@ -250,10 +253,10 @@ function renderLideresYSegundos() {
   // Ordenar segundos por pts y DG
   segundos.sort((a,b)=>b.pts-a.pts||b.dg-a.dg);
   document.getElementById("lideres").innerHTML = lideres.map(e=>
-    `<li>Grupo ${e.grupo} – <span class="flag">${e.bandera}</span>${e.nombre}</li>`
+    `<li>Grupo ${e.grupo} – ${flagHtml(e)}${e.nombre}</li>`
   ).join('');
   document.getElementById("segundos").innerHTML = segundos.map(e=>
-    `<li>Grupo ${e.grupo} – <span class="flag">${e.bandera}</span>${e.nombre}</li>`
+    `<li>Grupo ${e.grupo} – ${flagHtml(e)}${e.nombre}</li>`
   ).join('');
 }
 function simularResultados() {
