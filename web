@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador Eliminatoria CONCACAF 2026</title>
+  <style>
+    :root {
+      --azul: #003366;
+      --azul-claro: #0066cc;
+      --gris: #f5f5f5;
+      --eliminado: #fbeaea;
+      --clasificado: #d6ffc8;
+      --repechaje: #fffec3;
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--gris);
+      margin: 0; padding: 0 0 50px 0;
+    }
+    header {
+      background: var(--azul); color: #fff; padding: 24px 20px 12px 20px; text-align: center;
+    }
+    main {
+      max-width: 1050px; margin: 28px auto;
+      background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+      padding: 20px 12px 22px 18px;
+    }
+    section, .partidos { margin-bottom: 28px; }
+    h1 { margin-top: 0;}
+    h2 { color: var(--azul); font-size: 1.11em;}
+    h3 { color: var(--azul-claro); margin-bottom:6px; font-size:1em;}
+    ul { margin: 7px 0 2px 24px;}
+    .flag { font-size:1.1em;margin-right:4px;}
+    .bloques {display:flex;flex-wrap:wrap;gap:26px;}
+    .bloque-info {flex:1 1 255px;min-width:250px;background:var(--gris);padding:9px 16px 13px 20px;border-radius:9px;}
+    .tablas-grupos { display:flex; gap:22px; flex-wrap:wrap;}
+    .tabla-grupo {flex:1 1 270px; background:var(--gris); border-radius:8px;padding:8px;}
+    table { border-collapse: collapse; width: 100%; margin-bottom: 7px; background: #fff;}
+    th, td { border: 1px solid #bbb; padding: 8px 4px; text-align: center; font-size:0.98em;}
+    th { background: var(--azul); color: #fff;}
+    td.bandera-nombre { text-align:left;}
+    tr.clasificado {background:var(--clasificado);}
+    tr.eliminado {background:var(--eliminado);}
+    tr.repechaje {background:var(--repechaje);}
+    .fecha { font-weight:bold; font-size:1.05em; margin-top:15px;margin-bottom:7px;color:var(--azul);}
+    .partido-grid { display:grid; grid-template-columns: 1.7fr 0.6fr 1.1fr 0.6fr 1.7fr; align-items:center; gap:7px; margin-bottom:7px;}
+    input[type="number"] { width: 42px; text-align:center; border-radius:5px; padding:2px 4px;}
+    button {padding: 10px 25px; background: var(--azul-claro); color: #fff; border:none;border-radius:7px;cursor:pointer;font-size:1em;font-weight:bold;margin:15px 0 10px 0;}
+    button:hover {background: #004e9c;}
+    footer { margin: 50px 0 0 0; font-size: 0.94em; text-align: center;color:#666;}
+    .disclaimer, .copyright {margin:15px auto 0 auto;max-width:600px;font-size:0.92em;color:#888;}
+    @media (max-width: 950px) {
+      .tablas-grupos{flex-direction:column;} .bloques{flex-direction:column;} main{padding:1vw;}
+      .tabla-grupo {max-width:340px;margin:0 auto;}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Simulador Eliminatoria CONCACAF 2026</h1>
+</header>
+<main>
+  <!-- BLOQUES INFORMATIVOS -->
+  <div class="bloques" id="bloques-informativos">
+    <div class="bloque-info">
+      <h2>1) Primer lugar de cada grupo al momento</h2>
+      <ul id="lideres"></ul>
+    </div>
+    <div class="bloque-info">
+      <h2>2) Segundo lugar de cada grupo (ordenados por mejor rendimiento)</h2>
+      <ul id="segundos"></ul>
+    </div>
+    <div class="bloque-info">
+      <h2>3) Equipos ya clasificados (anfitriones)</h2>
+      <ul>
+        <li><span class="flag">🇨🇦</span>Canadá</li>
+        <li><span class="flag">🇺🇸</span>Estados Unidos</li>
+        <li><span class="flag">🇲🇽</span>México</li>
+      </ul>
+    </div>
+  </div>
+  <!-- TABLAS DE GRUPOS -->
+  <div class="tablas-grupos">
+    <div class="tabla-grupo"><h3>Grupo A</h3><table><thead><tr><th>Equipo</th><th>PTS</th><th>DG</th></tr></thead><tbody id="grupoA"></tbody></table></div>
+    <div class="tabla-grupo"><h3>Grupo B</h3><table><thead><tr><th>Equipo</th><th>PTS</th><th>DG</th></tr></thead><tbody id="grupoB"></tbody></table></div>
+    <div class="tabla-grupo"><h3>Grupo C</h3><table><thead><tr><th>Equipo</th><th>PTS</th><th>DG</th></tr></thead><tbody id="grupoC"></tbody></table></div>
+  </div>
+  <!-- PARTIDOS -->
+  <div class="partidos">
+    <div class="fecha">🗓️ Jueves 13 de noviembre 2025</div>
+    <form id="form-partidos" autocomplete="off" onsubmit="event.preventDefault(); simularResultados();">
+      <div class="partido-grid">
+        <span><span class="flag">🇬🇹</span>Guatemala</span>
+        <input type="number" min="0" id="g-guatemala1" />
+        <span>vs</span>
+        <input type="number" min="0" id="g-panamá1" />
+        <span><span class="flag">🇵🇦</span>Panamá</span>
+      </div>
+      <div class="partido-grid">
+        <span><span class="flag">🇸🇷</span>Surinam</span>
+        <input type="number" min="0" id="g-surinam1" />
+        <span>vs</span>
+        <input type="number" min="0" id="g-elsalvador1" />
+        <span><span class="flag">🇸🇻</span>El Salvador</span>
+      </div>
+      <div class="partido-grid">
+        <span><span class="flag">🇹🇹</span>Trinidad y Tobago</span>
+        <input type="number" min="0" id="g-trinidad1" />
+        <span>vs</span>
+        <input type="number" min="0" id="g-jamaica1" />
+        <span><span class="flag">🇯🇲</span>Jamaica</span>
+      </div>
+      <div class="partido-grid">
+        <span><span class="flag">🇧🇲</span>Bermudas</span>
+        <input type="number" min="0" id="g-bermudas1" />
+        <span>vs</span>
+        <input type="number" min="0" id="g-curazao1" />
+        <span><span class="flag">🇨🇼</span>Curazao</span>
+      </div>
+      <div class="partido-grid">
+        <span><span class="flag">🇭🇹</span>Haití</span>
+        <input type="number" min="0" id="g-haiti1" />
+        <span>vs</span>
+        <input type="number" min="0" id="g-costarica1" />
+        <span><span class="flag">🇨🇷</span>Costa Rica</span>
+      </div>
+      <div class="partido-grid">
+        <span><span class="flag">🇳🇮</span>Nicaragua</span>
+        <input type="number" min="0" id="g-nicaragua1" />
+        <span>vs</span>
+        <input type="number" min="0" id="g-honduras1" />
+        <span><span class="flag">🇭🇳</span>Honduras</span>
+      </div>
+      <div class="fecha">🗓️ Martes 18 de noviembre 2025</div>
+      <div class="partido-grid">
+        <span><span class="flag">🇵🇦</span>Panamá</span>
+        <input type="number" min="0" id="g-panamá2" />
+        <span>vs</span>
+        <input type="number" min="0" id="g-elsalvador2" />
+        <span><span class="flag">🇸🇻</span>El Salvador</span>
+      </div>
+      <div class="partido-grid">
+        <span><span class="flag">🇬🇹</span>Guatemala</span>
+        <input type="number" min="0" id="g-guatemala2" />
+        <span>vs</span>
+        <input type="number" min="0" id="g-surinam2" />
+        <span><span class="flag">🇸🇷</span>Surinam</span>
+      </div>
+      <div class="partido-grid">
+        <span><span class="flag">🇯🇲</span>Jamaica</span>
+        <input type="number" min="0" id="g-jamaica2" />
+        <span>vs</span>
+        <input type="number" min="0" id="g-curazao2" />
+        <span><span class="flag">🇨🇼</span>Curazao</span>
+      </div>
+      <div class="partido-grid">
+        <span><span class="flag">🇹🇹</span>Trinidad y Tobago</span>
+        <input type="number" min="0" id="g-trinidad2" />
+        <span>vs</span>
+        <input type="number" min="0" id="g-bermudas2" />
+        <span><span class="flag">🇧🇲</span>Bermudas</span>
+      </div>
+      <div class="partido-grid">
+        <span><span class="flag">🇨🇷</span>Costa Rica</span>
+        <input type="number" min="0" id="g-costarica2" />
+        <span>vs</span>
+        <input type="number" min="0" id="g-honduras2" />
+        <span><span class="flag">🇭🇳</span>Honduras</span>
+      </div>
+      <div class="partido-grid">
+        <span><span class="flag">🇭🇹</span>Haití</span>
+        <input type="number" min="0" id="g-haiti2" />
+        <span>vs</span>
+        <input type="number" min="0" id="g-nicaragua2" />
+        <span><span class="flag">🇳🇮</span>Nicaragua</span>
+      </div>
+      <button type="submit">Simular Resultados</button>
+    </form>
+  </div>
+</main>
+<footer>
+  <hr>
+  <div>Simulador Eliminatoria CONCACAF - Realizado por Miguel Angel Mialrio (Rafelmi)</div>
+  <div class="disclaimer">Este simulador fue realizado con fines de entretenimiento. No representa información oficial ni está asociado a la CONCACAF ni a la FIFA. Los datos y posiciones pueden variar según resultados reales y cambios en la competición.</div>
+  <div class="copyright">© 2025 Miguel Angel Mialrio (Rafelmi). Prohibida su copia o reproducción total/parcial para fines comerciales sin autorización. Todos los nombres, marcas, escudos y logos pertenecen a sus respectivos dueños.</div>
+</footer>
+<script>
+const equiposBase = {
+  "grupoA": [
+    { nombre: "Surinam",    bandera: "🇸🇷", pts: 6,  dg: 2 },
+    { nombre: "Panamá",     bandera: "🇵🇦", pts: 6,  dg: 1 },
+    { nombre: "Guatemala",  bandera: "🇬🇹", pts: 5,  dg: 0 },
+    { nombre: "El Salvador",bandera: "🇸🇻", pts: 3,  dg: -3 }
+  ],
+  "grupoB": [
+    { nombre: "Jamaica",        bandera: "🇯🇲", pts: 9,  dg: 8 },
+    { nombre: "Curazao",        bandera: "🇨🇼", pts: 8,  dg: 6 },
+    { nombre: "Trinidad y Tobago", bandera: "🇹🇹", pts: 5, dg: 1 },
+    { nombre: "Bermudas",       bandera: "🇧🇲", pts: 0,  dg: -15 }
+  ],
+  "grupoC": [
+    { nombre: "Honduras",    bandera: "🇭🇳", pts: 8,  dg: 5 },
+    { nombre: "Costa Rica",  bandera: "🇨🇷", pts: 6,  dg: 3 },
+    { nombre: "Haití",       bandera: "🇭🇹", pts: 5,  dg: 0 },
+    { nombre: "Nicaragua",   bandera: "🇳🇮", pts: 1,  dg: -8 }
+  ]
+};
+const partidos = [
+  { g:"grupoA", local:"Guatemala", visit:"Panamá",      idl:"g-guatemala1", idv:"g-panamá1" },
+  { g:"grupoA", local:"Surinam",   visit:"El Salvador", idl:"g-surinam1",   idv:"g-elsalvador1" },
+  { g:"grupoB", local:"Trinidad y Tobago", visit:"Jamaica", idl:"g-trinidad1", idv:"g-jamaica1" },
+  { g:"grupoB", local:"Bermudas",   visit:"Curazao",    idl:"g-bermudas1",  idv:"g-curazao1" },
+  { g:"grupoC", local:"Haití",      visit:"Costa Rica", idl:"g-haiti1",     idv:"g-costarica1" },
+  { g:"grupoC", local:"Nicaragua",  visit:"Honduras",   idl:"g-nicaragua1", idv:"g-honduras1" },
+  { g:"grupoA", local:"Panamá",     visit:"El Salvador", idl:"g-panamá2", idv:"g-elsalvador2" },
+  { g:"grupoA", local:"Guatemala",  visit:"Surinam",     idl:"g-guatemala2", idv:"g-surinam2" },
+  { g:"grupoB", local:"Jamaica",    visit:"Curazao",     idl:"g-jamaica2", idv:"g-curazao2" },
+  { g:"grupoB", local:"Trinidad y Tobago", visit:"Bermudas", idl:"g-trinidad2", idv:"g-bermudas2" },
+  { g:"grupoC", local:"Costa Rica", visit:"Honduras",    idl:"g-costarica2", idv:"g-honduras2" },
+  { g:"grupoC", local:"Haití",      visit:"Nicaragua",   idl:"g-haiti2",     idv:"g-nicaragua2" }
+];
+let equipos = {};
+function resetEquipos() {
+  equipos = {
+    "grupoA": equiposBase["grupoA"].map(eq => ({ ...eq })),
+    "grupoB": equiposBase["grupoB"].map(eq => ({ ...eq })),
+    "grupoC": equiposBase["grupoC"].map(eq => ({ ...eq }))
+  };
+}
+function renderTabla(grupoId) {
+  const tbody = document.getElementById(grupoId);
+  let arr = equipos[grupoId];
+  arr.sort((a,b)=> b.pts-b.pts|| b.dg-a.dg);
+  tbody.innerHTML = arr.map((eq,i) =>
+    `<tr class="${i===0?'clasificado':i===1?'repechaje':eq.pts===0?'eliminado':''}">
+      <td class="bandera-nombre"><span class="flag">${eq.bandera}</span>${eq.nombre}</td>
+      <td>${eq.pts}</td>
+      <td>${eq.dg>0?'+':''}${eq.dg}</td>
+    </tr>`
+  ).join('');
+}
+function renderLideresYSegundos() {
+  const lideres = [], segundos = [];
+  ["grupoA","grupoB","grupoC"].forEach((g,ix) => {
+    const arr = equipos[g].slice().sort((a,b) => b.pts-b.pts|| b.dg-a.dg);
+    lideres.push({grupo: String.fromCharCode(65+ix), ...arr[0]});
+    segundos.push({grupo: String.fromCharCode(65+ix), ...arr[1]});
+  });
+  // Ordenar segundos por pts y DG
+  segundos.sort((a,b)=>b.pts-a.pts||b.dg-a.dg);
+  document.getElementById("lideres").innerHTML = lideres.map(e=>
+    `<li>Grupo ${e.grupo} – <span class="flag">${e.bandera}</span>${e.nombre}</li>`
+  ).join('');
+  document.getElementById("segundos").innerHTML = segundos.map(e=>
+    `<li>Grupo ${e.grupo} – <span class="flag">${e.bandera}</span>${e.nombre}</li>`
+  ).join('');
+}
+function simularResultados() {
+  resetEquipos();
+  partidos.forEach(p => {
+    let eq1 = equipos[p.g].find(e=>e.nombre===p.local);
+    let eq2 = equipos[p.g].find(e=>e.nombre===p.visit);
+    let g1 = parseInt(document.getElementById(p.idl).value)||0;
+    let g2 = parseInt(document.getElementById(p.idv).value)||0;
+    if (g1>g2) { eq1.pts+=3; eq1.dg+=(g1-g2); eq2.dg-=(g1-g2);}
+    else if (g2>g1) { eq2.pts+=3; eq2.dg+=(g2-g1); eq1.dg-=(g2-g1);}
+    else { eq1.pts+=1; eq2.pts+=1;}
+  });
+  renderTabla('grupoA'); renderTabla('grupoB'); renderTabla('grupoC');
+  renderLideresYSegundos();
+}
+resetEquipos();
+renderTabla('grupoA');
+renderTabla('grupoB');
+renderTabla('grupoC');
+renderLideresYSegundos();
+</script>
+</body>
+</html>
